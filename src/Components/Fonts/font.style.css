@@ -1,0 +1,29 @@
+.font {
+     border: 1px solid #bdbdbd;
+     padding: 6px;
+     border-radius: 4px;
+     width: 18px;
+     height: 18px;
+}
+.font:hover {
+     cursor: pointer;
+}
+
+.red {
+     fill: red;
+}
+.blue {
+     fill: blue;
+}
+.green {
+     fill: green;
+}
+
+.chocolate {
+     fill: chocolate;
+}
+
+.black {
+     background-color: black;
+     fill: white;
+}

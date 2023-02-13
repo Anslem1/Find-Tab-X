@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+* {
+     padding: 0;
+     margin: 0;
+     /* box-sizing: border-box; */
+     /* outline: 1px solid; */
+}
+
+main {
+     background-color: #f1f1f1;
+;
+}
+.window-container {
+     width: 750px;
+     margin: 15px;
+     /* height: 100%; */
+     padding-bottom: 50px;
+     display: flex;
+     gap: 20px;
+     flex-direction: column;
+}
+
+.window-content {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 10px;
+     /* justify-content: center; */
+     /* align-items: center; */
+     /* margin-bottom: 30px; */
+}
+
+
+
+.minimized-container {
+     /* margin-bottom: 150px; */
+     /* padding-bottom: 20px; */
+     height: 100%;
+
+}
+
+.opened-window-container{
+     padding-top: 50px;
+}
+.window-content > div {
+     display: flex;
+     flex-wrap: wrap;
+     align-items: center;
+     justify-content: center;
+     width: min-content;
+}
+
+.hrCont {
+     padding-top: 20px;
+     padding-bottom: 20px;
+     clear: both;
+}
+.hrDiv {
+     width: 100%;
+     height: 8px;
+     border-bottom: 1px solid black;
+     text-align: center;
+}
+.hrSpan {
+     font-size: 12px;
+     background-color: #f3f5f6;
+     color: #555;
+     padding: 0 10px;
+}

@@ -1,0 +1,38 @@
+.search-bar-container {
+     position: fixed;
+     width: 100%;
+     height: 30px;
+     bottom: 0;
+     z-index: 1;
+     background-color: #ffffff;
+     padding: 10px;
+     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+          rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+}
+
+.search-bar-container > div:nth-of-type(1) {
+     margin-left: 10px;
+}
+.search-bar-container > div:nth-of-type(2) {
+     margin-right: 16px;
+}
+.search-bar-container > div > input {
+     width: 350px;
+     padding: 8px 15px;
+     border-radius: 5px;
+     border: 1px solid #afafab;
+     outline: none;
+}
+.search-bar-container > div > input::placeholder {
+     font-size: 15px;
+     font-family: Roboto;
+}
+
+.search-bar-action {
+     display: flex;
+     gap: 5px;
+     align-items: center;
+}
