@@ -18,7 +18,7 @@ function OpenedWindows ({
   createTabFromWindow,
   setWindowsArray,
   currentWindow,
-  setTabsToDeleteId,
+
   tabsToDeleteId
 }) {
   const [columnCount, setColumnCount] = useState(0)
@@ -71,20 +71,19 @@ function OpenedWindows ({
     console.log(tabid, 'tab id from delete')
     console.log(rightClickCount)
 
-    if (rightClickCount === 1 && selectedTabId !== tabid && !tabId) {
+    if (rightClickCount === 0 && selectedTabId !== tabid && !tabId) {
       console.log(tabid, 'FROM IF STATE MENT')
       if (tabid) {
-        tabsToDeleteId.push(tabid)
-        if (tabsToDeleteId !== []) {
+        const isTabIdInArray = tabsToDeleteId.includes(tabid)
+        if (!isTabIdInArray) {
+          tabsToDeleteId.push(tabid)
+        } else if (isTabIdInArray) {
           const removeFromArray = tabsToDeleteId.indexOf(tabid)
           if (removeFromArray > -1) {
             tabsToDeleteId.splice(removeFromArray, 1)
           }
         }
       }
-      // setTabsToDeleteId(deleteTabIdArray => {
-      //   console.log(deleteTabIdArray, 'fucntion map')
-      // })
     }
   }
 
@@ -156,7 +155,7 @@ function OpenedWindows ({
                             .includes(search.toLowerCase()))
                           ? 'url-search'
                           : search !== '' && 'not-url-search'
-                      }`}
+                      } ${tabsToDeleteId.includes(tab.id) && 'url-search'}`}
                     >
                       <img
                         src={tab.favIconUrl}

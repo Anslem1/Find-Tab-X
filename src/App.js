@@ -40,7 +40,6 @@ function App () {
     })
 
     await chrome.windows.onFocusChanged.addListener(async function (windowId) {
-
       //IF FOCUS  HAS GONE OUT OF A WINDOW
       if (windowId === -1) {
         await chrome.windows.getCurrent({ populate: true }, function (window) {
@@ -62,13 +61,13 @@ function App () {
     }
   }, [])
 
-  useEffect(() => {
-    // tabsToDeleteId.map(tabid => {
-    //   console.log(tabid)
-    //   return chrome.tabs.remove(tabid)
-    // })
-  }, [])
-  console.log(tabsToDeleteId, 'delete tab array')
+  function deleteSelectedTab () {
+    tabsToDeleteId.map(id => {
+      console.log('id', id)
+      return chrome.tabs.remove(id)
+    })
+    console.log(tabsToDeleteId, 'delete tab array')
+  }
 
   // RE-RENDERS WHEN A NEW WINDOW OR TAB IS CREATED OR REMOVED
   useEffect(() => {
@@ -306,6 +305,8 @@ function App () {
           onHoverTitle={onHoverTitle}
           addWindow={addWindow}
           closeTabs={closeTabOrTabs}
+          deleteSelectedTab={deleteSelectedTab}
+          tabsToDeleteId={tabsToDeleteId}
         />
       </main>
     </>

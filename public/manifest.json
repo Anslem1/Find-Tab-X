@@ -5,9 +5,7 @@
      "offline_enabled": true,
      "description": "A tab management tool to help you keep track of all your tabs and manage them, without the need to go through 100 of tabs and windows to find the site you are looking for.",
      "icons": {
-          "16": "favicon.ico",
-          "48": "logo192.png",
-          "128": "logo512.png"
+          "32": "/images/tab.jpg"
      },
 
      "permissions": ["tabs", "tabGroups", "windows"],

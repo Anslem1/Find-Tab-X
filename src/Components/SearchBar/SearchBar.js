@@ -9,7 +9,9 @@ function SearchBar ({
   pinAtab,
   onHoverTitle,
   addWindow,
-  closeTabs
+  closeTabs,
+  tabsToDeleteId,
+  deleteSelectedTab
 }) {
   const [searchBar, setSearchBar] = useState('')
 
@@ -32,7 +34,12 @@ function SearchBar ({
         <div className='search-bar-action'>
           <Addwindow addWindow={addWindow} onHoverTitle={onHoverTitle} />
           <Pin pinAtab={pinAtab} onHoverTitle={onHoverTitle} />
-          <Bin onHoverTitle={onHoverTitle} closeTabs={closeTabs} />
+          <Bin
+            onHoverTitle={onHoverTitle}
+            closeTabs={closeTabs}
+            tabsToDeleteId={tabsToDeleteId}
+            deleteSelectedTab={deleteSelectedTab}
+          />
         </div>
       </div>
     </>
