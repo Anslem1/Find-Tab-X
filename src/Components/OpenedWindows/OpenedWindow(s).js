@@ -18,7 +18,6 @@ function OpenedWindows ({
   createTabFromWindow,
   setWindowsArray,
   currentWindow,
-
   tabsToDeleteId
 }) {
   const [columnCount, setColumnCount] = useState(0)
@@ -68,11 +67,7 @@ function OpenedWindows ({
   }, [rightClickCount, selectedTabId, setWindowsArray, tabId])
 
   function deleteTabs (tabid) {
-    console.log(tabid, 'tab id from delete')
-    console.log(rightClickCount)
-
     if (rightClickCount === 0 && selectedTabId !== tabid && !tabId) {
-      console.log(tabid, 'FROM IF STATE MENT')
       if (tabid) {
         const isTabIdInArray = tabsToDeleteId.includes(tabid)
         if (!isTabIdInArray) {
@@ -120,7 +115,9 @@ function OpenedWindows ({
                       window.state === 'normal' && tab.active && 'tab-active'
                     } ${tab.audible && 'audible'}`}
                     title={tab.title}
+                    onClick={() => switchToTab(tab.id)}
                     //IF USER HOVERS OVER ANOTHER TAB, TURNS SET.RIGHT.CLICK TO 0
+
                     onMouseOver={() => {
                       if (tab.id !== selectedTabId) {
                         setRightClickCount(0)

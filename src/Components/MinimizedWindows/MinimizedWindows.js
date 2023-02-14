@@ -16,13 +16,13 @@ function ClosedWindows ({
   onHoverUrl,
   maximizeWindow,
   createTabFromWindow,
-  setWindowsArray
+  setWindowsArray,
+  tabsToDeleteId
 }) {
-  // const [rowCount, setRowCount] = useState(0)
   const [columnCount, setColumnCount] = useState(0)
   const parentRef = useRef(null)
 
-  const [rightClicks, setRightClicks] = useState(0)
+  const [rightClickCount, setRightClickCount] = useState(0)
 
   const [tabId, setTabId] = useState('')
   const [selectedTabId, setSelectedTabId] = useState('')
@@ -33,13 +33,23 @@ function ClosedWindows ({
     setColumnCount(Math.round(squareRoot) + 1)
   }, [window.tabs.length])
 
-  const handleRightClick = e => {
+  function handleRightClick (e) {
     e.preventDefault()
-    if (e.button === 2) setRightClicks(rightClicks + 1)
+    setRightClickCount(rightClickCount + 1)
+    if (rightClickCount >= 2) {
+      setRightClickCount(0)
+      setTabId('')
+    }
   }
 
   useEffect(() => {
-    if (rightClicks === 2) {
+    if (rightClickCount === 1) {
+      setTimeout(() => {
+        setRightClickCount(0)
+        setTabId('')
+      }, 800)
+    }
+    if (rightClickCount === 2) {
       if (tabId !== '' && selectedTabId !== '' && tabId === selectedTabId) {
         chrome.tabs.remove(tabId, () => {
           chrome.windows.getAll(
@@ -48,18 +58,34 @@ function ClosedWindows ({
             },
             function (windows) {
               setWindowsArray(windows)
-              setRightClicks(0)
+              setRightClickCount(0)
             }
           )
         })
       } else {
-        setRightClicks(0)
+        setRightClickCount(0)
         setSelectedTabId('')
         setTabId('')
         return
       }
     }
-  }, [rightClicks, selectedTabId, setWindowsArray, tabId])
+  }, [rightClickCount, selectedTabId, setWindowsArray, tabId])
+
+  function deleteTabs (tabid) {
+    if (rightClickCount === 0 && selectedTabId !== tabid && !tabId) {
+      if (tabid) {
+        const isTabIdInArray = tabsToDeleteId.includes(tabid)
+        if (!isTabIdInArray) {
+          tabsToDeleteId.push(tabid)
+        } else if (isTabIdInArray) {
+          const removeFromArray = tabsToDeleteId.indexOf(tabid)
+          if (removeFromArray > -1) {
+            tabsToDeleteId.splice(removeFromArray, 1)
+          }
+        }
+      }
+    }
+  }
 
   return (
     <>
@@ -84,8 +110,26 @@ function ClosedWindows ({
                     className={`tab-container ${
                       window.state === 'normal' && tab.active && 'tab-active'
                     } ${tab.audible && 'audible'}`}
-                    onClick={() => switchToTab(tab.id)}
                     title={tab.title}
+                    onClick={() => switchToTab(tab.id)}
+                    //IF USER HOVERS OVER ANOTHER TAB, TURNS SET.RIGHT.CLICK TO 0
+
+                    onMouseOver={() => {
+                      if (tab.id !== selectedTabId) {
+                        setRightClickCount(0)
+                      }
+                    }}
+                    onContextMenu={e => {
+                      handleRightClick(e)
+                      rightClickCount === 0 &&
+                        selectedTabId !== tab.id &&
+                        deleteTabs(tab.id)
+
+                      rightClickCount === 0 && setSelectedTabId(tab.id)
+                      rightClickCount === 1 &&
+                        tab.id === selectedTabId &&
+                        setTabId(selectedTabId)
+                    }}
                   >
                     <div
                       onMouseOver={() => {
@@ -104,15 +148,7 @@ function ClosedWindows ({
                             .includes(search.toLowerCase()))
                           ? 'url-search'
                           : search !== '' && 'not-url-search'
-                      }`}
-                      onContextMenu={e => {
-                        handleRightClick(e)
-                        rightClicks === 0 &&
-                          setSelectedTabId(tab.id, 'selected id from context')
-                        rightClicks === 1 &&
-                          tab.id === selectedTabId &&
-                          setTabId(selectedTabId)
-                      }}
+                      } ${tabsToDeleteId.includes(tab.id) && 'url-search'}`}
                     >
                       <img
                         src={tab.favIconUrl}

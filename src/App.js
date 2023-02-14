@@ -63,10 +63,9 @@ function App () {
 
   function deleteSelectedTab () {
     tabsToDeleteId.map(id => {
-      console.log('id', id)
+
       return chrome.tabs.remove(id)
     })
-    console.log(tabsToDeleteId, 'delete tab array')
   }
 
   // RE-RENDERS WHEN A NEW WINDOW OR TAB IS CREATED OR REMOVED
@@ -289,7 +288,8 @@ function App () {
                         onHoverUrl,
                         maximizeWindow,
                         createTabFromWindow,
-                        setWindowsArray
+                        setWindowsArray,
+                        tabsToDeleteId
                       }}
                     />
                   )}

@@ -3,16 +3,24 @@
      "short_name": "F-TX",
      "name": "Find Tab-X",
      "offline_enabled": true,
+     "author": "Anslem",
      "description": "A tab management tool to help you keep track of all your tabs and manage them, without the need to go through 100 of tabs and windows to find the site you are looking for.",
-     "icons": {
-          "32": "/images/tab.jpg"
-     },
 
+     "icons": {
+          "16": "/images/tab16.png",
+          "48": "/images/tab48.png",
+          "128": "/images/tab128.png"
+     },
      "permissions": ["tabs", "tabGroups", "windows"],
      "version": "1.0",
      "host_permissions": ["https://developer.chrome.com/*"],
      "action": {
           "default_popup": "index.html",
-          "default_title": "Find Tab-X extention"
+          "default_title": "Find Tab-X extention",
+          "default_icon": {
+               "16": "/images/tab16.png",
+               "48": "/images/tab48.png",
+               "128": "/images/tab128.png"
+          }
      }
 }
