@@ -63,7 +63,6 @@ function App () {
 
   function deleteSelectedTab () {
     tabsToDeleteId.map(id => {
-
       return chrome.tabs.remove(id)
     })
   }
@@ -200,7 +199,7 @@ function App () {
     })
   }
 
-  function removeTabs () {}
+  // function removeTabs () {}
   function createTabFromWindow (windowId) {
     chrome.tabs.create({ url: 'chrome://newtab', windowId })
     if (windowId) {
@@ -224,6 +223,14 @@ function App () {
   }
   function onHoverUrl (url) {
     setNavBarUrl(url)
+  }
+
+  function MinimizedWindowUi () {
+    const isMinimized = windowsArray.find(e => e.state === 'minimized')
+    if (isMinimized) {
+      return <h1>YOO</h1>
+    }
+    console.log(isMinimized, 'from ui')
   }
 
   return (
@@ -265,7 +272,13 @@ function App () {
                 </div>
               ))}
           </div>
-
+          {windowsArray.find(e => e.state === 'minimized') && (
+            <div className={'hrCont'}>
+              <div className='hrDiv'>
+                <span className='hrSpan'>Minimized windows</span>
+              </div>
+            </div>
+          )}
           <div className='window-content'>
             {windowsArray &&
               windowsArray.map((window, index) => (
@@ -301,7 +314,6 @@ function App () {
         <SearchBar
           searchValue={searchValue}
           pinAtab={pinAtab}
-          removeTabs={removeTabs}
           onHoverTitle={onHoverTitle}
           addWindow={addWindow}
           closeTabs={closeTabOrTabs}

@@ -8,6 +8,7 @@
 
      "icons": {
           "16": "/images/tab16.png",
+          "32": "/images/tab32.png",
           "48": "/images/tab48.png",
           "128": "/images/tab128.png"
      },
@@ -19,6 +20,7 @@
           "default_title": "Find Tab-X extention",
           "default_icon": {
                "16": "/images/tab16.png",
+               "32": "/images/tab32.png",
                "48": "/images/tab48.png",
                "128": "/images/tab128.png"
           }

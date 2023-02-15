@@ -25,16 +25,12 @@ main {
      display: flex;
      flex-wrap: wrap;
      gap: 10px;
-     /* justify-content: center; */
-     /* align-items: center; */
-     /* margin-bottom: 30px; */
+ 
 }
 
 
 
-.minimized-container {
-     /* margin-bottom: 150px; */
-     /* padding-bottom: 20px; */
+.minimized-container { 
      height: 100%;
 
 }
@@ -61,6 +57,7 @@ main {
      border-bottom: 1px solid black;
      text-align: center;
 }
+
 .hrSpan {
      font-size: 12px;
      background-color: #f3f5f6;
