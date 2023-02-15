@@ -20,10 +20,12 @@ function App () {
   const [tabsToDeleteId, setTabsToDeleteId] = useState([])
 
   // GET ALL WINDOWS AND TABS
-  useEffect(() => {
+  useEffect(async () => {
     chrome.tabs.query({}, function (tabs) {
       setTabsArray(tabs)
+    
     })
+
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       setCurrentTab(tabs)
     })
@@ -225,23 +227,19 @@ function App () {
     setNavBarUrl(url)
   }
 
-  function MinimizedWindowUi () {
-    const isMinimized = windowsArray.find(e => e.state === 'minimized')
-    if (isMinimized) {
-      return <h1>YOO</h1>
-    }
-    console.log(isMinimized, 'from ui')
-  }
-
   return (
     <>
       <main>
-        <Navbar
-          tabsArray={tabsArray}
-          windowsArray={windowsArray}
-          title={navbarTitle}
-          url={navbarUrl}
+        <SearchBar
+          searchValue={searchValue}
+          pinAtab={pinAtab}
+          onHoverTitle={onHoverTitle}
+          addWindow={addWindow}
+          closeTabs={closeTabOrTabs}
+          deleteSelectedTab={deleteSelectedTab}
+          tabsToDeleteId={tabsToDeleteId}
         />
+
         <div className='window-container'>
           <div className='window-content opened-window-container'>
             {windowsArray &&
@@ -310,15 +308,11 @@ function App () {
               ))}
           </div>
         </div>
-
-        <SearchBar
-          searchValue={searchValue}
-          pinAtab={pinAtab}
-          onHoverTitle={onHoverTitle}
-          addWindow={addWindow}
-          closeTabs={closeTabOrTabs}
-          deleteSelectedTab={deleteSelectedTab}
-          tabsToDeleteId={tabsToDeleteId}
+        <Navbar
+          tabsArray={tabsArray}
+          windowsArray={windowsArray}
+          title={navbarTitle}
+          url={navbarUrl}
         />
       </main>
     </>

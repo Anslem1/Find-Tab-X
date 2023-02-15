@@ -12,11 +12,16 @@
           "48": "/images/tab48.png",
           "128": "/images/tab128.png"
      },
-     "permissions": ["tabs", "tabGroups", "windows"],
+     "permissions": ["tabs", "windows"],
      "version": "1.0",
      "host_permissions": ["https://developer.chrome.com/*"],
+
+     "background": {
+          "service_worker": "background.js"
+     },
      "action": {
           "default_popup": "index.html",
+
           "default_title": "Find Tab-X extention",
           "default_icon": {
                "16": "/images/tab16.png",

@@ -10,14 +10,12 @@ function Navbar ({ tabsArray, windowsArray, title, url }) {
       {title !== '' ? (
         <>
           <div>
-
-          <p> {title}</p>
-          <p> {url}</p>
+            <p> {title}</p>
+            <p> {url}</p>
           </div>
         </>
       ) : (
         <p>
-          {' '}
           {tabLength} tabs in {windowLength} windows
         </p>
       )}
