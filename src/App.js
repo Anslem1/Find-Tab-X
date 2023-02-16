@@ -238,6 +238,8 @@ function App () {
           closeTabs={closeTabOrTabs}
           deleteSelectedTab={deleteSelectedTab}
           tabsToDeleteId={tabsToDeleteId}
+          tabsArray={tabsArray}
+          switchToTab ={switchToTab}
         />
 
         <div className='window-container'>
