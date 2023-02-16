@@ -17,7 +17,7 @@ function SearchBar ({
 }) {
   const [searchBar, setSearchBar] = useState('')
 
-  console.log(tabsArray)
+
 
   return (
     <>
