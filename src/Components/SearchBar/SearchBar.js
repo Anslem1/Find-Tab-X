@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import Addwindow from '../Fonts/addwindow'
 import Bin from '../Fonts/bin'
 import Pin from '../Fonts/pin'
-import './SearchBar.css'
 
+import './SearchBar.css'
 function SearchBar ({
   searchValue,
   pinAtab,
@@ -13,21 +13,26 @@ function SearchBar ({
   tabsToDeleteId,
   deleteSelectedTab,
   tabsArray,
-  switchToTab
+  switchToTab,
+  setShowSearchSuggestion,
+  showSearchSuggestion,
+  windowsArray
 }) {
   const [searchBar, setSearchBar] = useState('')
 
-
-
   return (
     <>
-      <div className='search-bar-container'>
+      <div
+        className='search-bar-container'
+        onContextMenu={e => e.preventDefault()}
+      >
         <div>
           <input
             type='text'
             name=''
             id=''
-            placeholder='Search for a tab..'
+            onClick={() => setShowSearchSuggestion(true)}
+            placeholder='Search for a keyword or tab..'
             onChange={e => {
               setSearchBar(e.target.value)
               searchValue(e.target.value)
@@ -35,32 +40,31 @@ function SearchBar ({
             value={searchBar}
           />{' '}
           {searchBar !== '' && (
-            <div
-              className='dropdown-search-container
-'
-            >
-              <>
-                {tabsArray &&
-                  tabsArray
-                    .filter(tab => {
-                      const searchTerm = searchBar.toLowerCase()
-                      const title = tab.title.toLowerCase()
-                      const url = tab.url.toLowerCase()
+            <>
+              {showSearchSuggestion && (
+                <div className='dropdown-search-container'>
+                  <>
+                    {tabsArray &&
+                      tabsArray
+                        .filter(tab => {
+                          const searchTerm = searchBar.toLowerCase()
+                          const title = tab.title.toLowerCase()
+                          const url = tab.url.toLowerCase()
 
-                      return (
-                        searchTerm !== '' &&
-                        (title.includes(searchTerm) ||
-                          url.includes(searchBar)) &&
-                        (url !== searchBar || title !== searchBar)
-                      )
-                    })
-                    .map(item => {
-                      return (
-                        <div>
-                          <div>
+                          return (
+                            searchTerm !== '' &&
+                            (title.includes(searchTerm) ||
+                              url.includes(searchBar)) &&
+                            (url !== searchBar || title !== searchBar)
+                          )
+                        })
+                        .map(item => {
+                          return (
                             <div
                               className='search-container'
-                              onClick={() => switchToTab(item.id)}
+                              onClick={() => {
+                                switchToTab(item.id)
+                              }}
                             >
                               <div className='search-image-container'>
                                 <img src={item.favIconUrl} alt='' />
@@ -70,12 +74,12 @@ function SearchBar ({
                                 <p>{item.url}</p>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                      )
-                    })}
-              </>
-            </div>
+                          )
+                        })}
+                  </>
+                </div>
+              )}
+            </>
           )}
         </div>
         <div className='search-bar-action'>

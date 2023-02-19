@@ -6,7 +6,7 @@ function Navbar ({ tabsArray, windowsArray, title, url }) {
   const windowLength = windowsArray.length
 
   return (
-    <nav>
+    <nav onContextMenu={e => e.preventDefault()}>
       {title !== '' ? (
         <>
           <div>

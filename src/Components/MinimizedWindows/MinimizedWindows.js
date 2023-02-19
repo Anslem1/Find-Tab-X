@@ -94,6 +94,7 @@ function ClosedWindows ({
           window.state === 'normal' && 'window-active'
         }`}
         onClick={() => switchToWindow(window.id)}
+        onContextMenu={e => e.preventDefault()}
       >
         <div
           className={`tab-body-container`}

@@ -18,12 +18,12 @@ function App () {
   const [navbarTitle, setNavBarTitle] = useState('')
   const [navbarUrl, setNavBarUrl] = useState('')
   const [tabsToDeleteId, setTabsToDeleteId] = useState([])
+  const [showSearchSuggestion, setShowSearchSuggestion] = useState(false)
 
   // GET ALL WINDOWS AND TABS
   useEffect(async () => {
     chrome.tabs.query({}, function (tabs) {
       setTabsArray(tabs)
-    
     })
 
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -186,8 +186,25 @@ function App () {
     }
   }
 
+ 
   function switchToTab (tabId) {
-    chrome.tabs.update(tabId, { active: true })
+    chrome.windows.getAll({ populate: true }, function (windows) {
+      for (var i = 0; i < windows.length; i++) {
+        var tabs = windows[i].tabs
+        for (var j = 0; j < tabs.length; j++) {
+          if (tabs[j].id === tabId) {
+            chrome.windows.update(
+              windows[i].id,
+              { focused: true },
+              function () {
+                chrome.tabs.update(tabId, { active: true })
+              }
+            )
+            return
+          }
+        }
+      }
+    })
   }
 
   function pinAtab () {
@@ -239,11 +256,21 @@ function App () {
           deleteSelectedTab={deleteSelectedTab}
           tabsToDeleteId={tabsToDeleteId}
           tabsArray={tabsArray}
-          switchToTab ={switchToTab}
+          switchToTab={switchToTab}
+          setShowSearchSuggestion={setShowSearchSuggestion}
+          showSearchSuggestion={showSearchSuggestion}
+          windowsArray={windowsArray}
         />
 
-        <div className='window-container'>
-          <div className='window-content opened-window-container'>
+        <div
+          className='window-container'
+          onClick={() => setShowSearchSuggestion(false)}
+          onContextMenu={e => e.preventDefault()}
+        >
+          <div
+            className='window-content opened-window-container'
+            onContextMenu={e => e.preventDefault()}
+          >
             {windowsArray &&
               windowsArray.map((window, index) => (
                 <div>
@@ -279,11 +306,14 @@ function App () {
               </div>
             </div>
           )}
-          <div className='window-content'>
+          <div
+            className='window-content'
+            onContextMenu={e => e.preventDefault()}
+          >
             {windowsArray &&
               windowsArray.map((window, index) => (
                 <div
-                  className={` ${
+                  className={`${
                     window.state === 'minimized' && 'minimized-container'
                   }`}
                 >

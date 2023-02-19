@@ -22,7 +22,7 @@
      "action": {
           "default_popup": "index.html",
 
-          "default_title": "Find Tab-X extention",
+          "default_title": "Find Tab-X",
           "default_icon": {
                "16": "/images/tab16.png",
                "32": "/images/tab32.png",

@@ -98,6 +98,7 @@ function OpenedWindows ({
         onClick={() => {
           switchToWindow(window.id)
         }}
+        onContextMenu={e => e.preventDefault()}
       >
         <div
           className={`tab-body-container`}
