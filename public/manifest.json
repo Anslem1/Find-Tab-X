@@ -4,7 +4,7 @@
      "name": "Find Tab-X",
      "offline_enabled": true,
      "author": "Anslem",
-     "description": "A tab management tool to help you keep track of all your tabs and manage them, without the need to go through 100 of tabs and windows to find the site you are looking for.",
+     "description": "A tab management tool to help you keep track of all your tabs and windows. Search, find, Open and Delete tabs and windows.",
 
      "icons": {
           "16": "/images/tab16.png",
