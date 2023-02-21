@@ -27,3 +27,12 @@
      background-color: black;
      fill: white;
 }
+
+.pink {
+     fill: pink;
+}
+
+.yellow {
+     fill: rgb(19, 28, 85);
+     /* background-color: black; */
+}

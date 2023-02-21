@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import Addwindow from '../Fonts/addwindow'
 import Bin from '../Fonts/bin'
+import Contact from '../Fonts/contact'
+import Github from '../Fonts/github'
+import Info from '../Fonts/info'
 import Pin from '../Fonts/pin'
 
 import './SearchBar.css'
@@ -61,7 +64,9 @@ function SearchBar ({
                         .map(item => {
                           return (
                             <div
-                              className='search-container'
+                              className={`search-container ${
+                                (item.active || item.audible) && 'audible'
+                              }`}
                               onClick={() => {
                                 switchToTab(item.id)
                               }}
@@ -86,11 +91,14 @@ function SearchBar ({
           <Addwindow addWindow={addWindow} onHoverTitle={onHoverTitle} />
           <Pin pinAtab={pinAtab} onHoverTitle={onHoverTitle} />
           <Bin
-            onHorTitle={onHoverTitle}
+            onHoverTitle={onHoverTitle}
             closeTabs={closeTabs}
             tabsToDeleteId={tabsToDeleteId}
             deleteSelectedTab={deleteSelectedTab}
           />
+          <Info onHoverTitle={onHoverTitle} />
+          <Github onHoverTitle={onHoverTitle} />
+          <Contact onHoverTitle={onHoverTitle} />
         </div>
       </div>
     </>
