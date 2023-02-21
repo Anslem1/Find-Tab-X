@@ -112,9 +112,7 @@ function OpenedWindows ({
               return (
                 <>
                   <div
-                    className={`tab-container ${
-                      window.state === 'normal' && tab.active && 'tab-active'
-                    } ${tab.audible && 'audible'}`}
+                    className={`tab-container`}
                     title={tab.title}
                     onClick={() => switchToTab(tab.id)}
                     //IF USER HOVERS OVER ANOTHER TAB, TURNS SET.RIGHT.CLICK TO 0
@@ -153,7 +151,9 @@ function OpenedWindows ({
                             .includes(search.toLowerCase()))
                           ? 'url-search'
                           : search !== '' && 'not-url-search'
-                      } ${tabsToDeleteId.includes(tab.id) && 'url-search'}`}
+                      } ${tabsToDeleteId.includes(tab.id) && 'url-search'} ${
+                        window.state === 'normal' && tab.active && 'tab-active'
+                      }`}
                     >
                       <img
                         src={tab.favIconUrl}

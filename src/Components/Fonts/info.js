@@ -7,7 +7,7 @@ function Info ({ onHoverTitle }) {
       viewBox='0 0 192 512'
       className='font pink'
       onMouseOver={() => {
-        onHoverTitle('Developed by chidiebube')
+        onHoverTitle('Developed by Chidiebube')
       }}
       onMouseLeave={() => {
         onHoverTitle('')
