@@ -107,11 +107,13 @@ function ClosedWindows ({
             window.tabs.map((tab, index) => {
               return (
                 <>
+                  {console.log({ tab })}
                   <div
-                    className={`tab-container ${
-                      window.state === 'normal' && tab.active && 'tab-active'
-                    } ${tab.audible && 'audible'}`}
+                    className={`tab-container ${tab.active && 'tab-active'} ${
+                      tab.audible && 'audible'
+                    }`}
                     title={tab.title}
+                    key={index}
                     onClick={() => switchToTab(tab.id)}
                     //IF USER HOVERS OVER ANOTHER TAB, TURNS SET.RIGHT.CLICK TO 0
 

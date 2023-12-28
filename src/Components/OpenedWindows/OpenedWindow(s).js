@@ -89,6 +89,8 @@ function OpenedWindows ({
     setColumnCount(Math.round(squareRoot) + 1)
   }, [window.tabs.length])
 
+  console.log(window)
+
   return (
     <>
       <div
@@ -111,9 +113,11 @@ function OpenedWindows ({
             window.tabs.map((tab, index) => {
               return (
                 <>
+                  {console.log(tab)}
                   <div
                     className={`tab-container`}
                     title={tab.title}
+                    key={index}
                     onClick={() => switchToTab(tab.id)}
                     //IF USER HOVERS OVER ANOTHER TAB, TURNS SET.RIGHT.CLICK TO 0
 
@@ -152,7 +156,7 @@ function OpenedWindows ({
                           ? 'url-search'
                           : search !== '' && 'not-url-search'
                       } ${tabsToDeleteId.includes(tab.id) && 'url-search'} ${
-                        window.state === 'normal' && tab.active && 'tab-active'
+                        tab.active && 'tab-active'
                       }`}
                     >
                       <img

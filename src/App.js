@@ -7,8 +7,6 @@ import OpenedWindows from './Components/OpenedWindows/OpenedWindow(s)'
 import Navbar from './Components/Nav/Navbar'
 import SearchBar from './Components/SearchBar/SearchBar'
 import MinimizedWindows from './Components/MinimizedWindows/MinimizedWindows'
-import { tab } from '@testing-library/user-event/dist/tab'
-
 
 function App () {
   const [tabsArray, setTabsArray] = useState([])
@@ -188,22 +186,8 @@ function App () {
   }
 
   function switchToTab (tabId) {
-    chrome.windows.getAll({ populate: true }, function (windows) {
-      for (var i = 0; i < windows.length; i++) {
-        var tabs = windows[i].tabs
-        for (var j = 0; j < tabs.length; j++) {
-          if (tabs[j].id === tabId) {
-            chrome.windows.update(
-              windows[i].id,
-              { focused: true },
-              function () {
-                chrome.tabs.update(tabId, { active: true })
-              }
-            )
-            return
-          }
-        }
-      }
+    chrome.tabs.update(tabId, { active: true }, updatedTab => {
+      chrome.windows.update(updatedTab.windowId, { focused: true })
     })
   }
 
@@ -217,7 +201,6 @@ function App () {
       chrome.tabs.remove(tab[0].id)
     })
   }
-
 
   function createTabFromWindow (windowId) {
     chrome.tabs.create({ url: 'chrome://newtab', windowId })
@@ -261,7 +244,6 @@ function App () {
           showSearchSuggestion={showSearchSuggestion}
           windowsArray={windowsArray}
         />
-
 
         <div
           className='window-container'

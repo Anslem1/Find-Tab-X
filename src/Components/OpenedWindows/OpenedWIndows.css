@@ -13,7 +13,6 @@
      display: grid;
      grid-template-columns: repeat(6, 1fr);
      justify-content: center;
-     /* align-items: center; */
      min-width: 30px;
      height: 100%;
      gap: 10px;
@@ -27,6 +26,7 @@
 .window-active {
      box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
      border-radius: 10px;
+ 
 }
 
 .tab-container > div {
@@ -94,6 +94,7 @@
 .tab-active {
      box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 2px;
      border-radius: 7px;
+     /* background-color: pink !important; */
 }
 
 .active:hover {
