@@ -13,7 +13,7 @@
           "128": "/images/tab128.png"
      },
      "permissions": ["tabs", "windows"],
-     "version": "1.5",
+     "version": "2.0",
      "host_permissions": ["https://developer.chrome.com/*"],
 
      "background": {
